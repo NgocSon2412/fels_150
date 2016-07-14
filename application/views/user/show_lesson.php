@@ -7,8 +7,7 @@
         </div>
         <div class="col-sm-8">
             <h3><b><?= lang('test'); ?></b></h3>
-            <div><?= lang('the_lesson_will_submit_in'); ?> <span id="time"></span> <?= lang('minutes'); ?></div>
-            <form  action="result/create" method="post" id="edit_lesson">
+            <form action="result/create" method="post">
                 <div class="form-group">
                     <?php $i = 0;
                     if (isset($list_word) && count($list_word)) { ?>
@@ -41,7 +40,7 @@
                             } ?>
                         </ol>
                         <input type="hidden" name="lesson_id" value="<?= $lesson['id']; ?>" />
-                        <input type="submit" id="bt" name = "submit" class="btn btn-default" value="<?= lang('submit'); ?>">
+                        <input type="submit" name = "submit" class="btn btn-default" value="<?= lang('submit'); ?>">
                     <?php } ?>                      
                 </div>               
             </form>
