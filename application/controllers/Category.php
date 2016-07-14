@@ -97,11 +97,26 @@ class Category extends My_Controller
         $data['lesson'] = $this->Lesson_Model->get(['category_id' => $id]);
         $data['category'] = $this->Category_Model->get_category_id(array('id' => $id));
         $data['lesson_of_category'] = $this->Category_Model->show_lesson_of_category($id);
-        $data['word_of_category'] = $this->Category_Model->show_word_of_category($id);
+        $total_rows = $this->Word_Model->total();
+        $data['word_of_category'] = $this->Word_Model->view(0, $total_rows,['category_id' => $id]);
         $data['title'] = lang('category');
         $data['template'] = 'category/show';
         $data['authentication'] = $this->authentication;
         $this->load->view('layout/index', $data);
+    }
+
+    public function search() 
+    {
+        $category_id = $this->input->get('category');
+        $q = $this->input->get('q');
+        $total_rows = $this->Word_Model->total();
+        if($q == "") {
+            $data['list_word'] = $this->Word_Model->view(0, $total_rows,['category_id' => $category_id]);
+        } else {
+            $data['list_word'] = $this->Word_Model->search(['content' => $q, 'category_id' => $category_id]);
+        }    
+        $data['authentication'] = $this->authentication;
+        $this->load->view($this->template('word/filter', 'user/filter_word'), $data);
     }
 
     protected function set_rules()

@@ -39,15 +39,11 @@ class Word extends My_Controller
         $total_rows = $this->Word_Model->total();
         $list_word = $this->Word_Model->view(0, $total_rows);
 
-        if ($q == 'none') {
-            $data['list_word'] = $list_word ;       
-        } elseif ($q == 'learned') {
+        if ($q == 'learned') {
             $data['list_word'] = $this->Word_Model->word_learn($list_word)['word_learned'];
         } elseif ($q == 'learn') {
             $data['list_word'] = $this->Word_Model->word_learn($list_word)['word_learn'];
-        } else {
-            $data['list_word'] = $this->Word_Model->view(0, $total_rows, ['categories.name' => $q]);
-        }  
+        }
         $data['authentication'] = $this->authentication;
         $this->load->view($this->template('word/filter', 'user/filter_word'), $data);
     }
@@ -55,7 +51,16 @@ class Word extends My_Controller
     public function search() 
     {
         $q = $this->input->get('q');
-        $data['list_word'] = $this->Word_Model->search(['content' => $q]);
+        $a = $this->input->get('a');
+        $total_rows = $this->Word_Model->total();
+        if ($q == "" && $a == 'none') {
+            $data['list_word'] = $this->Word_Model->view(0, $total_rows);
+        } else {
+            if ($a == 'none') {
+                $a = "";
+            }
+            $data['list_word'] = $this->Word_Model->search(['content' => $q, 'categories.name' => $a]);
+        }
         $data['authentication'] = $this->authentication;
         $this->load->view($this->template('word/filter', 'user/filter_word'), $data);
     }
@@ -63,7 +68,7 @@ class Word extends My_Controller
     public function show($id) 
     {
         $data['word'] = $this->Word_Model->get_word(['id' => $id]);
-        $data['word_answer'] = $this->Word_Answer_Model->get_answer(['word_id' =>  $data['word']['id'], 'correct' => 1]);
+        $data['word_answer'] = $this->Word_Answer_Model->get_word_answer(['word_id' =>  $data['word']['id'], 'correct' => 1]);
         $data['title'] = lang('word');
         $data['template'] = 'word/show';
         $data['authentication'] = $this->authentication;

@@ -4,6 +4,7 @@
             <tr>
                 <th><div><label><input type="checkbox" id="checkAll"></label></div></th>
                 <th><?= lang('word'); ?></th>
+                <th><?= lang('answer'); ?></th>
                 <th><?= lang('category'); ?></th>
                 <th><?= lang('created_at'); ?></th>
                 <th><?= lang('updated_at'); ?></th>
@@ -20,6 +21,7 @@
                             <input type="checkbox" class = "ch" name= "checkbox[]" value = "<?= $value['word_id']; ?>"/>
                         </td>
                         <td><a href="word/show/<?= $value['word_id']; ?>"><?= $value['content']; ?></a></td>
+                        <td><?= $value['word_answer']['content']; ?></td>
                         <td><a href="category/show/<?= $value['category_id']; ?>"><?= $value['category_name']; ?></td>
                         <td><?= $value['created_at']; ?></td>
                         <td><?= $value['updated_at']; ?></td>

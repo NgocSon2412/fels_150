@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-sm-3" style="margin-bottom: 20px;">
             <form method="post" action="">
-                <select class="form-control" name="customers" onchange="showCustomer(this.value, 'lesson/filter')">
+                <select class="form-control" name="customers" onchange="showCustomer(this.value, 'lesson/filter?')">
                     <option value="none"><?= lang('choose_catrgory')?></option>
                     <?php if (isset($list_categories) && count($list_categories)) {
                         foreach ($list_categories as $key => $value) { ?>

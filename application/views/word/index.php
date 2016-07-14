@@ -18,7 +18,7 @@
         <div class="row col-sm-6" style="margin-bottom: 20px;">
             <form method="post" action="" class="form-inline">
                 <div class="col-sm-5">
-                    <select class="form-control" name="customers" onchange="showCustomer(this.value, 'word/filter')">
+                    <select id = "test" class="form-control" name="" onchange="search('word/search?')">
                         <option value="none"><?= lang('choose_catrgory')?></option>
                         <?php if (isset($list_categories) && count($list_categories)) {
                             foreach ($list_categories as $key => $value) { ?>
@@ -28,10 +28,10 @@
                     </select>
                 </div>
                 <div class="col-sm-7">
-                    <input class="form-control" type="text" id="txt1" onkeyup="showCustomer(this.value, 'word/search')">
+                    <input class="form-control" type="text" id="txt1" onkeyup="search('word/search?')">
                     <button type="submit" class="btn btn-default"><?= lang('search'); ?></button>
                 </div>
-            </form> 
+            </form>
         </div>      
     </div>
     <div class="row col-sm-12"  id="index">
@@ -41,6 +41,7 @@
                     <tr>
                         <th><div><label><input type="checkbox" id="checkAll"></label></div></th>
                         <th><?= lang('word'); ?></th>
+                        <th><?= lang('answer'); ?></th>
                         <th><?= lang('category'); ?></th>
                         <th><?= lang('created_at'); ?></th>
                         <th><?= lang('updated_at'); ?></th>
@@ -57,6 +58,7 @@
                                     <input type="checkbox" class = "ch" name= "checkbox[]" value = "<?= $value['word_id']; ?>"/>
                                 </td>
                                 <td><a href="word/show/<?= $value['word_id']; ?>"><?= $value['content']; ?></a></td>
+                                <td><?= $value['word_answer']['content']; ?></td>
                                 <td><a href="category/show/<?= $value['category_id']; ?>"><?= $value['category_name']; ?></td>
                                 <td><?= $value['created_at']; ?></td>
                                 <td><?= $value['updated_at']; ?></td>

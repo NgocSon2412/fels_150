@@ -27,13 +27,13 @@
                     <?php if ($authentication['id'] != $user['id']) { 
                         if ($this->Relationship_Model->is_following($authentication['id'], $user['id'])) { ?>
                             <form action = "relationships/delete" method = "post">
-                              <input type="hidden" name="method" value="<?= $user['id']; ?>" />
-                              <input type="submit" name="unfollow" value="Unfollow" class="btn" />
+                                <input type="hidden" name="method" value="<?= $user['id']; ?>" />
+                                <input type="submit" name="unfollow" value="Unfollow" class="btn" />
                             </form>
                         <?php } else { ?>
                             <form action = "relationships/create" method = "post">
-                              <input type="hidden" name="method" value="<?= $user['id'];?>" />
-                              <input type="submit" name="follow" value="follow" class="btn btn-primary" />
+                                <input type="hidden" name="method" value="<?= $user['id'];?>" />
+                                <input type="submit" name="follow" value="follow" class="btn btn-primary" />
                             </form>
                         <?php } 
                     } ?>   

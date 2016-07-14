@@ -24,7 +24,25 @@ function showCustomer(str, action) {
             document.getElementById("index").innerHTML = xhttp.responseText;
         }
     };
-    xhttp.open("GET", action + "?q=" + str, true);
+    xhttp.open("GET", action + "q=" + str, true);
+    xhttp.send();
+}
+
+function search(action) {
+    a = $("#test").val();
+    q = $("#txt1").val();
+    var xhttp;
+    if (a == "") {
+        document.getElementById("index").innerHTML = "";
+        return;
+    }
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            document.getElementById("index").innerHTML = xhttp.responseText;
+        }
+    };
+    xhttp.open("GET", action + "q=" + q + "&a=" + a , true);    
     xhttp.send();
 }
 

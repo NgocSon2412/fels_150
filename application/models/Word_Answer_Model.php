@@ -14,6 +14,16 @@ class Word_Answer_Model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+    public function get_word_answer($param_where = NULL) 
+    {
+        $this->db->select('*')->from(self::TABLE);
+
+        if(isset($param_where) && count($param_where)) {
+            $this->db->where($param_where);
+        }
+        return $this->db->get()->row_array();
+    }
+
     public function get_answer_id($param_where = NULL) 
     {
         $this->db->select('*')->from(self::TABLE);

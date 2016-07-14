@@ -29,7 +29,11 @@ class Word_Model extends CI_Model
         if(isset($param_where) && count($param_where)) {
             $this->db->where($param_where);
         }
-        return $this->db->get()->result_array();   
+        $arrayName = $this->db->get()->result_array();
+        for ($i=0; $i < count($arrayName) ; $i++) { 
+            $arrayName[$i]['word_answer'] = $this->Word_Answer_Model->get_word_answer(['word_id' => $arrayName[$i]['word_id'], 'correct' => '1']);
+        }
+        return $arrayName;
     }
 
     public function search($param_where = NULL) 
@@ -42,7 +46,11 @@ class Word_Model extends CI_Model
         if(isset($param_where) && count($param_where)) {
             $this->db->like($param_where);
         }
-        return $this->db->get()->result_array();   
+        $arrayName = $this->db->get()->result_array();
+        for ($i=0; $i < count($arrayName) ; $i++) { 
+            $arrayName[$i]['word_answer'] = $this->Word_Answer_Model->get_word_answer(['word_id' => $arrayName[$i]['word_id'], 'correct' => '1']);
+        }
+        return $arrayName;
     }
     
     public function insert($param_data = NULL) 
