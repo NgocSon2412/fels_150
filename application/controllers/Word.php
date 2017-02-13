@@ -8,7 +8,7 @@ class Word extends My_Controller
         parent::__construct();
         $this->check_authentication();
         $this->check_action('category', $this->router->fetch_method());
-    }
+    }test
 
     public function index($page = 1) 
     {
